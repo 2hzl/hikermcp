@@ -438,9 +438,10 @@ var qy71v = {
             sid + '-' + nid + '/';
         var ph = request(pu, self.hdr());
         var real = '';
+        /* 页面输出的是 player_aaaa={...}（无 var 前缀、结尾无分号） */
         var mm = ph.match(new RegExp(
-            'var\\s+player_aaaa\\s*=\\s*' +
-            '(\\{[\\s\\S]*?\\})\\s*;'));
+            '(?:var\\s+)?player_aaaa\\s*=\\s*' +
+            '(\\{[\\s\\S]*?\\})(?=\\s*;|<\\/script|\\s*$)'));
         if (mm) {
             try {
                 var obj = JSON.parse(mm[1]);
