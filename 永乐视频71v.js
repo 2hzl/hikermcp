@@ -103,7 +103,8 @@ var qy71v = {
         var self = this,
             d = this.d = [],
             d_ = this.d_ = [];
-        var pg = parseInt(MY_PAGE || '1', 10);
+        var pg = typeof MY_PAGE !== 'undefined' ? parseInt(MY_PAGE, 10) : 1;
+        if (isNaN(pg) || pg < 1) pg = 1;
 
         if (pg == 1) {
             d_.push({
@@ -160,7 +161,8 @@ var qy71v = {
             d = this.d = [];
         var kw = getMyVar('keyword', '');
         if (!kw) { setResult(d); return; }
-        var pg = parseInt(MY_PAGE || '1', 10);
+        var pg = typeof MY_PAGE !== 'undefined' ? parseInt(MY_PAGE, 10) : 1;
+        if (isNaN(pg) || pg < 1) pg = 1;
         var url;
         if (pg == 1) {
             url = self.host + '/vodsearch/-------------.html?wd=' + encodeURIComponent(kw);
@@ -179,8 +181,9 @@ var qy71v = {
     detail: function() {
         var self = this,
             d = this.d = [];
-        var vid = MY_PARAMS.vod_id || getMyVar('vod_id', '');
-        var name = MY_PARAMS.vod_name || getMyVar('vod_name', '');
+        var mp = typeof MY_PARAMS !== 'undefined' ? MY_PARAMS : {};
+        var vid = mp.vod_id || getMyVar('vod_id', '');
+        var name = mp.vod_name || getMyVar('vod_name', '');
         if (!vid) { setResult(d); return; }
 
         var res = self.fetch(self.host + '/voddetail/' + vid + '/');
