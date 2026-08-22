@@ -1,7 +1,7 @@
 //js:
 /* ========= 永乐视频71v · 海阔视界规则（模板1风格，二级页在小程序内打开） ========= */
 
-const qy71v = {
+var qy71v = {
     host: 'https://www.71v.net',
     ua: 'Mozilla/5.0 (Linux; Android 12) AppleWebKit/537.36',
     d: [],
