@@ -78,7 +78,7 @@ function parseList(html) {
             title: it.title,
             pic_url: it.pic,
             desc: it.desc,
-            url: it.href + '#immersiveTheme#',
+            url: _full(it.href) + '#immersiveTheme#',
             col_type: 'movie_3'
         });
     }
