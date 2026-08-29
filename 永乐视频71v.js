@@ -138,12 +138,15 @@ var qy71v = {
                     })
                 }
             });
+            /* 站点导航实际分类：/vodtype/1-4 + /label/hot /label/new */
             var cats = [
                 { t: '首页', s: '' },
-                { t: '电影', s: '1' },
-                { t: '剧集', s: '2' },
-                { t: '综艺', s: '3' },
-                { t: '动漫', s: '4' }
+                { t: '电影', s: 'vodtype/1' },
+                { t: '剧集', s: 'vodtype/2' },
+                { t: '综艺', s: 'vodtype/3' },
+                { t: '动漫', s: 'vodtype/4' },
+                { t: '热榜', s: 'label/hot' },
+                { t: '最新', s: 'label/new' }
             ];
             for (var i = 0; i < cats.length; i++) {
                 (function(tn, tid) {
@@ -165,13 +168,13 @@ var qy71v = {
 
         var cat = getMyVar('c71', '');
         var html;
-        if (!cat) {
+        if (cat) {
+            /* 本站列表页无分页（单页全量），pg>1 直接空，避免重复 */
+            if (pg > 1) { setResult(d); return; }
+            html = self.fetch(self.host + '/' + cat + '/');
+        } else {
             if (pg > 1) { setResult(d); return; }
             html = self.fetch(self.host + '/');
-        } else {
-            html = self.fetch(
-                self.host + '/vodshow/' + cat +
-                '-----------' + (pg > 1 ? pg : '') + '/');
         }
         var list = self.parseList(html || '');
         if (!list.length && pg == 1) {
